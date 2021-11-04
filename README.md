@@ -1,7 +1,7 @@
 Job Vacancy Application
 =======================
 
-[![build status](https://gitlab.com/fiuba-memo2/jobvacancy/badges/master/build.svg)](https://gitlab.com/fiuba-memo2/jobvacancy/commits/master)
+[![build status](https://gitlab.com/fiuba-memo2/tp1/moscu/badges/master/pipeline.svg)](https://gitlab.com/fiuba-memo2/tp1/moscu/commits/master)
 
 ## PostgreSQL setup
 
