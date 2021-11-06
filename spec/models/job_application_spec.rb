@@ -29,6 +29,13 @@ describe JobApplication do
       ja = described_class.create_for('applicant@test.com', offer)
       expect(ja.job_offer).to eq(offer)
     end
+
+    it 'should set cv_url' do
+      cv_url = 'www.linkedin.com/mylinkedin'
+      offer = job_offer
+      ja = described_class.create_for('applicant@test.com', offer, cv_url)
+      expect(ja.cv_url).to eq(cv_url)
+    end
   end
 
   describe 'process' do
