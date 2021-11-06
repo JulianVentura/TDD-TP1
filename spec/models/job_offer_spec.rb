@@ -12,5 +12,10 @@ describe JobOffer do
       job_offer = described_class.new(title: 'a title')
       expect(job_offer).to be_valid
     end
+
+    it 'should have 0 postulations when created' do
+      job_offer = described_class.new(title: 'a title')
+      expect(job_offer.postulants).to equal 0
+    end
   end
 end
