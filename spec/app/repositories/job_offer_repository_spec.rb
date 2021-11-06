@@ -8,6 +8,20 @@ describe JobOfferRepository do
     UserRepository.new.save(user)
     user
   end
+  # rubocop:disable RSpec/ExampleLength
+
+  describe 'save a JobOffer' do
+    it 'saves a valid job offer' do
+      job_offer = JobOffer.new(title: 'a title',
+                               updated_on: Date.today,
+                               is_active: true,
+                               user_id: owner.id)
+      repository.save(job_offer)
+      saved_offer = repository.find(job_offer.id)
+      expect(saved_offer.postulants).to eq job_offer.postulants
+    end
+  end
+  # rubocop:enable RSpec/ExampleLength
 
   describe 'deactive_old_offers' do
     let!(:today_offer) do

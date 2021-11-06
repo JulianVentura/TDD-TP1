@@ -8,7 +8,7 @@ Feature: Job offer postulations counter
     And I have "Programmer vacancy" offer in my offers list
     And I activate it
 
-  @wip
+
   Scenario: JP1 - No postulations
     Given there are 0 postulations
     When I see my offers list
