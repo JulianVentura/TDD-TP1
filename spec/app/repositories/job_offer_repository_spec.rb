@@ -20,6 +20,17 @@ describe JobOfferRepository do
       saved_offer = repository.find(job_offer.id)
       expect(saved_offer.postulants).to eq job_offer.postulants
     end
+
+    it 'saves a valid job offer with one postulant' do
+      job_offer = JobOffer.new(title: 'a title',
+                               updated_on: Date.today,
+                               is_active: true,
+                               user_id: owner.id)
+      job_offer.apply
+      repository.save(job_offer)
+      saved_offer = repository.find(job_offer.id)
+      expect(saved_offer.postulants).to eq job_offer.postulants
+    end
   end
   # rubocop:enable RSpec/ExampleLength
 

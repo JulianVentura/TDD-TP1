@@ -14,7 +14,6 @@ Feature: Job offer postulations counter
     When I see my offers list
     Then I should see "No postulants" postulations in the "Programmer vacancy" offer
 
-  @wip
   Scenario: JP2 - 5 postulations
     Given there are 5 postulations
     When I see my offers list

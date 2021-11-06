@@ -16,7 +16,7 @@ class JobOffer
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
     @user_id = data[:user_id]
-    @postulants = 0
+    @postulants = data[:postulants] || 0
     validate!
   end
 
