@@ -10,6 +10,7 @@ variables:
 stages:
   - build
   - deploy_staging
+  - deploy_master
 
 job_build:
   stage: build
@@ -28,3 +29,11 @@ job_deploy_staging:
   - dpl --provider=heroku --app=jobvacancystagingmoscu --api-key=dd88d23d-eb36-4d89-9b7e-10818a9a89b3
   only:
   - staging
+
+job_deploy_master:
+  stage: deploy_master
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=jobvacancyprodmoscu --api-key=f88c1673-0c72-4cdb-869f-dcf2871a7ea5
+  only:
+  - master
