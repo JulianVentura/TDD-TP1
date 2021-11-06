@@ -1,4 +1,10 @@
-Given('there are {int} postulations') do |int|
+Given('there are {int} postulations') do |postulations|
+  (0...postulations).each do
+    visit '/job_offers/latest'
+    click_link 'Apply'
+    fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
+    click_button('Apply')
+  end
 end
 
 When('I see my offers list') do

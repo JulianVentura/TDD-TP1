@@ -36,6 +36,10 @@ class JobOffer
     self.is_active = false
   end
 
+  def apply
+    @postulants += 1
+  end
+
   def old_offer?
     (Date.today - updated_on) >= 30
   end
