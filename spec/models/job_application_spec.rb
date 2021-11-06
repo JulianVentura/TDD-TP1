@@ -37,5 +37,13 @@ describe JobApplication do
       expect(JobVacancy::App).to receive(:deliver).with(:notification, :contact_info_email, ja)
       ja.process
     end
+
+    it 'should increase job offer postulants counter by one' do
+      prev_postulants = job_offer.postulants
+      ja = described_class.create_for('applicant@test.com', job_offer)
+      expect(JobVacancy::App).to receive(:deliver).with(:notification, :contact_info_email, ja)
+      ja.process
+      expect(job_offer.postulants).to eq(prev_postulants + 1)
+    end
   end
 end
