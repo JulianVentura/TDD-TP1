@@ -46,6 +46,11 @@ JobVacancy::App.controllers :job_offers do
     JobOfferRepository.new.save @job_offer
     flash[:success] = 'Contact information sent.'
     redirect '/job_offers'
+  rescue ActiveModel::ValidationError => e
+    @job_application = JobApplicationForm.new
+    @errors = e.model.errors
+    flash.now[:error] = 'Please review the errors'
+    render 'job_offers/apply'
   end
 
   post :create do

@@ -26,7 +26,7 @@ class JobApplication
   private
 
   def cv_url_must_be_a_valid_link
-    errors.add(:cv_url, 'should be a link (example www.linkedin.com/mycv)') unless
+    errors.add(:cv_url, 'CV should be a link (example www.linkedin.com/mycv)') unless
         @cv_url.match(/www\..*\..*/) || @cv_url == ''
   end
 end

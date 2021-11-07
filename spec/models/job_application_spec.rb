@@ -17,7 +17,7 @@ describe JobApplication do
     end
 
     it 'should be invalid when cv url is not a valid url' do
-      check_validation(:cv_url, 'Cv url should be a link (example www.linkedin.com/mycv)') do
+      check_validation(:cv_url, 'Cv url CV should be a link (example www.linkedin.com/mycv)') do
         described_class.create_for('applicant@test.com', job_offer, 'linkedin.com')
       end
     end

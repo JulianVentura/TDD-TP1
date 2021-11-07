@@ -11,11 +11,11 @@ Feature: CV Attachment
     When I apply adding "www.linkedin.com/mylinkedin" as cv link
     Then I should receive a mail with offerer info
 
-  @wip
+  
   Scenario: CV2 - Invalid link
     Given I access the offers list page
-    When I apply adding "www.linkedin.com/mylinkedin" as cv link
-    Then I should see error "Cv url should be a link (example www.linkedin.com/mycv)"
+    When I apply adding "linkedin.com/mylinkedin" as cv link
+    Then I should see error "CV should be a link (example www.linkedin.com/mycv)"
 
   @wip
   Scenario: CV3 - No CV
