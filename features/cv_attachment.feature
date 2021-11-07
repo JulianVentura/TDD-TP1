@@ -15,7 +15,7 @@ Feature: CV Attachment
   Scenario: CV2 - Invalid link
     Given I access the offers list page
     When I apply adding "www.linkedin.com/mylinkedin" as cv link
-    Then I should see error "CV should be a link (example www.linkedin.com/mycv)"
+    Then I should see error "Cv url should be a link (example www.linkedin.com/mycv)"
 
   @wip
   Scenario: CV3 - No CV

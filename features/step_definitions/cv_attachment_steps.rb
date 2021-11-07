@@ -4,3 +4,7 @@ When('I apply adding {string} as cv link') do |url|
   fill_in('job_application_form[cv_url]', with: url)
   click_button('Apply')
 end
+
+Then('I should see error {string}') do |error|
+  page.should have_content(error)
+end

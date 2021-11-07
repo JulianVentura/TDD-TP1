@@ -32,3 +32,5 @@ RSpec/MultipleExpectations:
   Max: 3
 Style/GuardClause:
   Enabled: false
+Layout/EndOfLine:
+  Enabled: false
