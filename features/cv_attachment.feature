@@ -17,7 +17,7 @@ Feature: CV Attachment
     When I apply adding "linkedin.com/mylinkedin" as cv link
     Then I should see error "CV should be a link (example www.linkedin.com/mycv)"
 
-  @wip
+  
   Scenario: CV3 - No CV
     Given I access the offers list page
     When I apply adding "" as cv link
