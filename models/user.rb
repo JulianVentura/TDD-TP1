@@ -9,6 +9,13 @@ class User
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
                                               message: 'invalid email' }
 
+  def validate_password(password)
+    if password.size < 8
+      errors.add :password, 'password must contain at least 8 characters'
+      raise_validation_error
+    end
+  end
+
   def initialize(data = {})
     @id = data[:id]
     @name = data[:name]
@@ -16,6 +23,7 @@ class User
     @crypted_password = if data[:password].nil?
                           data[:crypted_password]
                         else
+                          validate_password(data[:password])
                           Crypto.encrypt(data[:password])
                         end
     @job_offers = data[:job_offers]

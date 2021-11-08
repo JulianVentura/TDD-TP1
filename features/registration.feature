@@ -7,7 +7,6 @@ Feature: Registration
     When I register with email "anemail@mail.com" and password "StrongPa$sw0rd"
     Then I should be able to login with email "anemail@mail.com" and password "StrongPa$sw0rd"
 
-  @wip
   Scenario: P2 - Less than 8 characters
     Given I am not registered
     When I register with email "anemail@mail.com" and password "$tr0nG"

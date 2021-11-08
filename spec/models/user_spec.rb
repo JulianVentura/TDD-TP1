@@ -35,6 +35,12 @@ describe User do
       end
     end
 
+    it 'should be invalid when password is shorter than 8 characters' do
+      check_validation(:password, 'Password password must contain at least 8 characters') do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'short')
+      end
+    end
+
     it 'should be valid when all field are valid' do
       user = described_class.new(name: 'John Doe', email: 'john@doe.com',
                                  crypted_password: 'a_secure_passWord!')
