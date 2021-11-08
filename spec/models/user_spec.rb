@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe User do
-  subject(:user) { described_class.new({}) }
+  subject(:user) do
+    described_class.new(name: 'John Doe', email: 'john@doe.com',
+                        crypted_password: 'a_secure_passWord!')
+  end
 
   describe 'model' do
     it { is_expected.to respond_to(:id) }
@@ -12,27 +15,27 @@ describe User do
   end
 
   describe 'valid?' do
-    it 'should be false when name is blank' do
-      user = described_class.new(email: 'john.doe@someplace.com',
-                                 crypted_password: 'a_secure_passWord!')
-      expect(user.valid?).to eq false
-      expect(user.errors).to have_key(:name)
+    it 'should be invalid when name is blank' do
+      check_validation(:name, "Name can't be blank") do
+        described_class.new(email: 'john.doe@someplace.com',
+                            crypted_password: 'a_secure_passWord!')
+      end
     end
 
-    it 'should be false when email is not valid' do
-      user = described_class.new(name: 'John Doe', email: 'john',
-                                 crypted_password: 'a_secure_passWord!')
-      expect(user.valid?).to eq false
-      expect(user.errors).to have_key(:email)
+    it 'should be invalid when email is not valid' do
+      check_validation(:email, 'Email invalid email') do
+        described_class.new(name: 'John Doe', email: 'john',
+                            crypted_password: 'a_secure_passWord!')
+      end
     end
 
-    it 'should be false when password is blank' do
-      user = described_class.new(name: 'John Doe', email: 'john')
-      expect(user.valid?).to eq false
-      expect(user.errors).to have_key(:crypted_password)
+    it 'should be invalid when password is blank' do
+      check_validation(:crypted_password, "Crypted password can't be blank") do
+        described_class.new(name: 'John Doe', email: 'john@doe.com')
+      end
     end
 
-    it 'should be true when all field are valid' do
+    it 'should be valid when all field are valid' do
       user = described_class.new(name: 'John Doe', email: 'john@doe.com',
                                  crypted_password: 'a_secure_passWord!')
       expect(user.valid?).to eq true

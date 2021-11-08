@@ -21,6 +21,7 @@ class User
     @job_offers = data[:job_offers]
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
+    validate!
   end
 
   def has_password?(password)

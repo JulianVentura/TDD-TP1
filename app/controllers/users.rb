@@ -1,16 +1,16 @@
 JobVacancy::App.controllers :users do
   get :new, map: '/register' do
-    @user = User.new
+    @user = UserForm.new
     render 'users/new'
   end
 
   post :create do
-    password_confirmation = params[:user][:password_confirmation]
-    params[:user].reject! { |k, _| k == 'password_confirmation' }
+    password_confirmation = params[:user_form][:password_confirmation]
+    params[:user_form].reject! { |k, _| k == 'password_confirmation' }
 
-    @user = User.new(params[:user])
+    @user = User.new(params[:user_form])
 
-    if params[:user][:password] == password_confirmation
+    if params[:user_form][:password] == password_confirmation
       if UserRepository.new.save(@user)
         flash[:success] = 'User created'
         redirect '/'
@@ -22,5 +22,11 @@ JobVacancy::App.controllers :users do
       flash.now[:error] = 'Passwords do not match'
       render 'users/new'
     end
+
+  rescue ActiveModel::ValidationError => e
+    @user = UserForm.new
+    @errors = e.model.errors
+    flash.now[:error] = 'Please review the errors'
+    render 'users/new'
   end
 end
