@@ -11,7 +11,7 @@ end
 Given(/^I am logged in as job offerer$/) do
   visit '/login'
   fill_in('user_form[email]', with: 'offerer@test.com')
-  fill_in('user_form[password]', with: 'Passw0rd!')
+  fill_in('user_form[password]', with: 'StrongPa$sw0rd')
   click_button('Login')
   page.should have_content('offerer@test.com')
 end
