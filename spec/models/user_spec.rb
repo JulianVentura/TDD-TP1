@@ -53,6 +53,12 @@ describe User do
       end
     end
 
+    it 'should be invalid when password does not have an uppercase' do
+      check_validation(:password, 'Password password must contain at least 1 uppercase character') do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'notasecurepa$$w0rd')
+      end
+    end
+
     it 'should be valid when all field are valid' do
       user = described_class.new(name: 'John Doe', email: 'john@doe.com',
                                  crypted_password: 'a_secure_pa$$W0rd!')

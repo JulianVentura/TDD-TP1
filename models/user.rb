@@ -6,12 +6,13 @@ class User
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
   VALID_PASSWORD_SYMBOLS = ['$', ')', '_'].freeze
   NUMBER_REGEX = /\d/.freeze
+  UPPERCASE_REGEX = /[[:upper:]]/.freeze
 
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
                                               message: 'invalid email' }
 
-  def validate_password(password)
+  def validate_password(password) # rubocop:disable Metrics/AbcSize
     if password.size < 8
       errors.add :password, 'password must contain at least 8 characters'
       raise_validation_error
@@ -23,6 +24,11 @@ class User
 
     if password.match(NUMBER_REGEX).nil?
       errors.add :password, 'password must contain at least 1 number'
+      raise_validation_error
+    end
+
+    if password.match(UPPERCASE_REGEX).nil?
+      errors.add :password, 'password must contain at least 1 uppercase character'
       raise_validation_error
     end
   end

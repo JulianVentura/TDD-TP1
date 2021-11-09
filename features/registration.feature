@@ -22,7 +22,6 @@ Feature: Registration
     When I register with email "anemail@mail.com" and password "$tronGpassword"
     Then I should see error "password must contain at least 1 number"
 
-  @wip
   Scenario: P5 - No uppercase
     Given I am not registered
     When I register with email "anemail@mail.com" and password "$tr0ngpassword"
