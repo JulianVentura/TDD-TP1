@@ -48,6 +48,7 @@ JobVacancy::App.controllers :job_offers do
     redirect '/job_offers'
   rescue ActiveModel::ValidationError => e
     @job_application = JobApplicationForm.new
+    @job_application.applicant_email = applicant_email
     @errors = e.model.errors
     flash.now[:error] = 'Please review the errors'
     render 'job_offers/apply'
