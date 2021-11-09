@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   subject(:user) do
     described_class.new(name: 'John Doe', email: 'john@doe.com',
-                        crypted_password: 'a_secure_passWord!')
+                        crypted_password: 'a_secure_pa$$Word!')
   end
 
   describe 'model' do
@@ -18,14 +18,14 @@ describe User do
     it 'should be invalid when name is blank' do
       check_validation(:name, "Name can't be blank") do
         described_class.new(email: 'john.doe@someplace.com',
-                            crypted_password: 'a_secure_passWord!')
+                            crypted_password: 'a_secure_pa$$Word!')
       end
     end
 
     it 'should be invalid when email is not valid' do
       check_validation(:email, 'Email invalid email') do
         described_class.new(name: 'John Doe', email: 'john',
-                            crypted_password: 'a_secure_passWord!')
+                            crypted_password: 'a_secure_pa$$Word!')
       end
     end
 
@@ -41,15 +41,21 @@ describe User do
       end
     end
 
+    it 'should be invalid when password does not have a $ ) _ symbol' do
+      check_validation(:password, 'Password password must contain at least 1 of these special characters $ ) _') do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'notasecurepassWord')
+      end
+    end
+
     it 'should be valid when all field are valid' do
       user = described_class.new(name: 'John Doe', email: 'john@doe.com',
-                                 crypted_password: 'a_secure_passWord!')
+                                 crypted_password: 'a_secure_pa$$Word!')
       expect(user.valid?).to eq true
     end
   end
 
   describe 'has password?' do
-    let(:password) { 'password' }
+    let(:password) { 'a_secure_pa$$Word!' }
     let(:user) do
       described_class.new(password: password,
                           email: 'john.doe@someplace.com',

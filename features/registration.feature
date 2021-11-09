@@ -12,7 +12,6 @@ Feature: Registration
     When I register with email "anemail@mail.com" and password "$tr0nG"
     Then I should see error "password must contain at least 8 characters"
 
-  @wip
   Scenario: P3 - No symbol
     Given I am not registered
     When I register with email "anemail@mail.com" and password "str0nGpassword"

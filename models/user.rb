@@ -4,6 +4,7 @@ class User
   attr_accessor :id, :name, :email, :crypted_password, :job_offers, :updated_on, :created_on
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
+  VALID_PASSWORD_SYMBOLS = ['$', ')', '_'].freeze
 
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
@@ -12,6 +13,10 @@ class User
   def validate_password(password)
     if password.size < 8
       errors.add :password, 'password must contain at least 8 characters'
+      raise_validation_error
+    end
+    unless VALID_PASSWORD_SYMBOLS.any? { |c| password.include? c }
+      errors.add :password, 'password must contain at least 1 of these special characters $ ) _'
       raise_validation_error
     end
   end
