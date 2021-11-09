@@ -5,6 +5,7 @@ class User
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
   VALID_PASSWORD_SYMBOLS = ['$', ')', '_'].freeze
+  NUMBER_REGEX = /\d/.freeze
 
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
@@ -17,6 +18,11 @@ class User
     end
     unless VALID_PASSWORD_SYMBOLS.any? { |c| password.include? c }
       errors.add :password, 'password must contain at least 1 of these special characters $ ) _'
+      raise_validation_error
+    end
+
+    if password.match(NUMBER_REGEX).nil?
+      errors.add :password, 'password must contain at least 1 number'
       raise_validation_error
     end
   end

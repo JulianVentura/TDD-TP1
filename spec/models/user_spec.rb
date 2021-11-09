@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   subject(:user) do
     described_class.new(name: 'John Doe', email: 'john@doe.com',
-                        crypted_password: 'a_secure_pa$$Word!')
+                        crypted_password: 'a_secure_pa$$W0rd!')
   end
 
   describe 'model' do
@@ -18,14 +18,14 @@ describe User do
     it 'should be invalid when name is blank' do
       check_validation(:name, "Name can't be blank") do
         described_class.new(email: 'john.doe@someplace.com',
-                            crypted_password: 'a_secure_pa$$Word!')
+                            crypted_password: 'a_secure_pa$$W0rd!')
       end
     end
 
     it 'should be invalid when email is not valid' do
       check_validation(:email, 'Email invalid email') do
         described_class.new(name: 'John Doe', email: 'john',
-                            crypted_password: 'a_secure_pa$$Word!')
+                            crypted_password: 'a_secure_pa$$W0rd!')
       end
     end
 
@@ -43,19 +43,25 @@ describe User do
 
     it 'should be invalid when password does not have a $ ) _ symbol' do
       check_validation(:password, 'Password password must contain at least 1 of these special characters $ ) _') do
-        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'notasecurepassWord')
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'notasecurepassW0rd')
+      end
+    end
+
+    it 'should be invalid when password does not have number' do
+      check_validation(:password, 'Password password must contain at least 1 number') do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'notasecurepa$$Word')
       end
     end
 
     it 'should be valid when all field are valid' do
       user = described_class.new(name: 'John Doe', email: 'john@doe.com',
-                                 crypted_password: 'a_secure_pa$$Word!')
+                                 crypted_password: 'a_secure_pa$$W0rd!')
       expect(user.valid?).to eq true
     end
   end
 
   describe 'has password?' do
-    let(:password) { 'a_secure_pa$$Word!' }
+    let(:password) { 'a_secure_pa$$W0rd!' }
     let(:user) do
       described_class.new(password: password,
                           email: 'john.doe@someplace.com',

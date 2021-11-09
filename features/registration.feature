@@ -17,7 +17,6 @@ Feature: Registration
     When I register with email "anemail@mail.com" and password "str0nGpassword"
     Then I should see error "password must contain at least 1 of these special characters $ ) _"
 
-  @wip
   Scenario: P4 - No number
     Given I am not registered
     When I register with email "anemail@mail.com" and password "$tronGpassword"
