@@ -37,6 +37,11 @@ JobVacancy::App.controllers :job_offers do
     render 'job_offers/list'
   end
 
+  post :clean do
+    @offers = JobOfferRepository.new.all_active
+    render 'job_offers/list'
+  end
+
   post :apply, with: :offer_id do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
