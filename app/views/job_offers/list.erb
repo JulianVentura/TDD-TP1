@@ -1,10 +1,18 @@
 <h1>Current Job Offers</h1>
-<div class="search-box">
-	<form method="POST" action="search" class="form-search">
-		 <%= csrf_token_field %>
-		<input type="text" name="q" />
-		<input type="submit" value="search" id="search-button" class="btn btn-primary"/>
-	</form>
+<div id="container" style="display:flex; float:right ">
+	<div class="search-box">
+		<form method="POST" action="search" class="form-search">
+			 <%= csrf_token_field %>
+			<input type="text" name="q" />
+			<input type="submit" value="search" id="search-button" class="btn btn-primary"/>
+		</form>
+	</div>
+	<div class="clean-box">
+		<form method="POST" action="clean" class="form-clean">
+			<%= csrf_token_field %>
+			<input type="submit" value="clean" id="clean-button" class="btn btn-primary"/>
+		</form>
+	</div>
 </div>
 
 <table class="table table-bordered">

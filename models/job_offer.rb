@@ -3,7 +3,7 @@ class JobOffer
 
   attr_accessor :id, :user, :user_id, :title,
                 :location, :description, :is_active,
-                :updated_on, :created_on
+                :updated_on, :created_on, :postulants
 
   validates :title, presence: true
 
@@ -16,6 +16,7 @@ class JobOffer
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
     @user_id = data[:user_id]
+    @postulants = data[:postulants] || 0
     validate!
   end
 
@@ -33,6 +34,10 @@ class JobOffer
 
   def deactivate
     self.is_active = false
+  end
+
+  def apply
+    @postulants += 1
   end
 
   def old_offer?

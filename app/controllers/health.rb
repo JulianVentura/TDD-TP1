@@ -23,7 +23,7 @@ JobVacancy::App.controllers :health do
     User.destroy
     user = User.create(email: 'offerer@test.com',
                        name: 'Offerer',
-                       password: 'Passw0rd!')
+                       password: 'StrongPa$sw0rd')
     JobOffer.create(title: 'Java programmer',
                     user: user,
                     description: 'Spring experience required',

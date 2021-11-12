@@ -1,12 +1,12 @@
 JobVacancy::App.controllers :sessions do
   get :login, map: '/login' do
-    @user = User.new
+    @user = UserForm.new
     render 'sessions/new'
   end
 
   post :create do
-    email = params[:user][:email]
-    password = params[:user][:password]
+    email = params[:user_form][:email]
+    password = params[:user_form][:password]
 
     gate_keeper = GateKeeper.new.authenticate(email, password)
 
@@ -17,7 +17,7 @@ JobVacancy::App.controllers :sessions do
     end
 
     gate_keeper.when_failed do
-      @user = User.new
+      @user = UserForm.new
       flash[:error] = 'Invalid credentials'
       redirect '/login'
     end
